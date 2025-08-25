@@ -14,3 +14,4 @@ class Publisher implements TagInterface {
     return this.name;
   }
 }
+export default Publisher;

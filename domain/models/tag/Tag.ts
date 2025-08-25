@@ -14,3 +14,4 @@ class Tag implements TagInterface {
     return this.name;
   }
 }
+export default Tag;

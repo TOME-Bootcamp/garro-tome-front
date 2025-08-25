@@ -1,11 +1,13 @@
+import Author from '@/domain/models/author/Author';
+
 class AuthorMockRepository implements AuthorRepository {
   private readonly authors: AuthorInterface[];
 
   constructor() {
     this.authors = [
       new Author(1, 'Author 1', 'Author 1'),
-      new Author(2, 'Author 1', 'Author 1'),
-      new Author(3, 'Author 1', 'Author 1'),
+      new Author(2, 'Author 2', 'Author 2'),
+      new Author(3, 'Author 3', 'Author 3'),
     ];
   }
 
@@ -14,11 +16,12 @@ class AuthorMockRepository implements AuthorRepository {
   }
 
   findById(id: number): AuthorInterface | undefined {
-    this.authors.forEach((author) => {
+    for (const author of this.authors) {
       if (author.getId() === id) {
         return author;
       }
-    });
+    }
     return undefined;
   }
 }
+export default AuthorMockRepository;

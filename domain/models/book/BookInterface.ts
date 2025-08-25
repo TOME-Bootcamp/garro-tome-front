@@ -7,7 +7,7 @@ interface BookInterface {
   getCoverUrl(): string;
   getSynopsis(): string;
   getLanguage(): string;
-  getPublisherId(): number;
-  getAuthorId(): number;
-  getTagsIds(): number[];
+  getPublisher(): PublisherInterface;
+  getAuthor(): AuthorInterface;
+  getTags(): TagInterface[];
 }

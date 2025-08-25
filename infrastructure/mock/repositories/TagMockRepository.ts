@@ -1,3 +1,5 @@
+import Tag from '@/domain/models/tag/Tag';
+
 class TagMockRepository implements TagRepository {
   private readonly tags: Tag[];
 
@@ -9,11 +11,12 @@ class TagMockRepository implements TagRepository {
     return this.tags;
   }
   findById(id: number): TagInterface | undefined {
-    this.tags.forEach((tag) => {
+    for (const tag of this.tags) {
       if (tag.getId() === id) {
         return tag;
       }
-    });
+    }
     return undefined;
   }
 }
+export default TagMockRepository;

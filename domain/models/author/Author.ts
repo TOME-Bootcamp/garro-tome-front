@@ -20,3 +20,4 @@ class Author implements AuthorInterface {
     return this.surname;
   }
 }
+export default Author;

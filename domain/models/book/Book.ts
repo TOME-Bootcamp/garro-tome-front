@@ -7,9 +7,9 @@ class Book implements BookInterface {
   private readonly coverUrl: string;
   private readonly synopsis: string;
   private readonly language: string;
-  private readonly publisherId: number;
-  private readonly authorId: number;
-  private readonly tagsIds: number[];
+  private readonly publisher: PublisherInterface;
+  private readonly author: AuthorInterface;
+  private readonly tags: TagInterface[];
 
   public constructor(
     id: number,
@@ -20,9 +20,9 @@ class Book implements BookInterface {
     coverUrl: string,
     synopsis: string,
     language: string,
-    publisherId: number,
-    authorId: number,
-    tagsIds: number[],
+    publisher: PublisherInterface,
+    author: AuthorInterface,
+    tags: TagInterface[],
   ) {
     this.id = id;
     this.title = title;
@@ -32,13 +32,13 @@ class Book implements BookInterface {
     this.coverUrl = coverUrl;
     this.synopsis = synopsis;
     this.language = language;
-    this.publisherId = publisherId;
-    this.authorId = authorId;
-    this.tagsIds = tagsIds;
+    this.publisher = publisher;
+    this.author = author;
+    this.tags = tags;
   }
 
-  getAuthorId(): number {
-    return this.authorId;
+  getAuthor(): AuthorInterface {
+    return this.author;
   }
 
   getCoverUrl(): string {
@@ -61,8 +61,8 @@ class Book implements BookInterface {
     return this.pages;
   }
 
-  getPublisherId(): number {
-    return this.publisherId;
+  getPublisher(): PublisherInterface {
+    return this.publisher;
   }
 
   getReleaseDate(): Date {
@@ -73,11 +73,12 @@ class Book implements BookInterface {
     return this.synopsis;
   }
 
-  getTagsIds(): number[] {
-    return this.tagsIds;
+  getTags(): TagInterface[] {
+    return this.tags;
   }
 
   getTitle(): string {
     return this.title;
   }
 }
+export default Book;

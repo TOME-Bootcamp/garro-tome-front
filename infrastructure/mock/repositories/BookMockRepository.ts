@@ -1,3 +1,8 @@
+import AuthorMockRepository from '@/infrastructure/mock/repositories/AuthorMockRepository';
+import PublisherMockRepository from '@/infrastructure/mock/repositories/PublisherMockRepository';
+import TagMockRepository from '@/infrastructure/mock/repositories/TagMockRepository';
+import Book from '@/domain/models/book/Book';
+
 class BookMockRepository implements BookRepository {
   private readonly books: BookInterface[];
   private readonly authorRepo: AuthorRepository = new AuthorMockRepository();
@@ -12,11 +17,11 @@ class BookMockRepository implements BookRepository {
         '0123456789',
         new Date(''),
         999,
-        'placeholder',
+        'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1629308732i/727800.jpg',
         'placeholder',
         'Spanish',
-        1,
-        1,
+        <PublisherInterface>this.publisherRepo.findById(1),
+        <AuthorInterface>this.authorRepo.findById(1),
         [],
       ),
       new Book(
@@ -25,11 +30,11 @@ class BookMockRepository implements BookRepository {
         '0123456789',
         new Date(''),
         999,
-        'placeholder',
+        'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1651340688i/727798.jpg',
         'placeholder',
         'English',
-        2,
-        2,
+        <PublisherInterface>this.publisherRepo.findById(2),
+        <AuthorInterface>this.authorRepo.findById(2),
         [],
       ),
     ];
@@ -40,18 +45,18 @@ class BookMockRepository implements BookRepository {
   }
 
   findById(id: number): BookInterface | undefined {
-    this.books.forEach((book: BookInterface) => {
+    for (const book of this.books) {
       if (book.getId() === id) {
         return book;
       }
-    });
+    }
     return undefined;
   }
 
   getBookAuthor(id: number): AuthorInterface | undefined {
     this.books.forEach((book: BookInterface) => {
       if (book.getId() === id) {
-        return this.authorRepo.findById(book.getAuthorId());
+        return book.getAuthor();
       }
     });
     return undefined;
@@ -60,24 +65,20 @@ class BookMockRepository implements BookRepository {
   getBookPublisher(id: number): PublisherInterface | undefined {
     this.books.forEach((book: BookInterface) => {
       if (book.getId() === id) {
-        return this.publisherRepo.findById(book.getPublisherId());
+        return book.getPublisher();
       }
     });
     return undefined;
   }
 
   getBookTags(id: number): TagInterface[] {
-    const tags: TagInterface[] = [];
+    let tags: TagInterface[] = [];
     this.books.forEach((book: BookInterface) => {
       if (book.getId() === id) {
-        book.getTagsIds().forEach((tagId) => {
-          const tag: TagInterface | undefined = this.tagRepo.findById(tagId);
-          if (tag) {
-            tags.push(tag);
-          }
-        });
+        tags = book.getTags();
       }
     });
     return tags;
   }
 }
+export default BookMockRepository;
