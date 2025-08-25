@@ -1,0 +1,1 @@
+type TagRepository = Repository<TagInterface>;

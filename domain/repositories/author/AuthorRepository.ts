@@ -1,0 +1,1 @@
+type AuthorRepository = Repository<AuthorInterface>;
