@@ -1,0 +1,3 @@
+interface TagInterface {
+  getName(): string;
+}
