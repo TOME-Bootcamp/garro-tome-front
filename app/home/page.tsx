@@ -15,12 +15,7 @@ export default function Home() {
       (book: BookInterface) =>
         book.getTitle().toLowerCase().includes(query.toLowerCase()) ||
         book.getIsbn().toLowerCase().includes(query.toLowerCase()) ||
-        book.getAuthor()?.getName().toLowerCase().includes(query.toLowerCase()) ||
-        book
-          .getTags()
-          .forEach((tag: TagInterface) =>
-            tag.getName().toLowerCase().includes(query.toLowerCase()),
-          ),
+        book.getAuthor()?.getName().toLowerCase().includes(query.toLowerCase()),
     );
     setBooks(filtered);
     console.log(filtered);

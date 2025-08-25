@@ -22,7 +22,7 @@ class BookMockRepository implements BookRepository {
         'Spanish',
         <PublisherInterface>this.publisherRepo.findById(1),
         <AuthorInterface>this.authorRepo.findById(1),
-        [],
+        [<TagInterface>this.tagRepo.findById(1)],
       ),
       new Book(
         2,
@@ -35,7 +35,7 @@ class BookMockRepository implements BookRepository {
         'English',
         <PublisherInterface>this.publisherRepo.findById(2),
         <AuthorInterface>this.authorRepo.findById(2),
-        [],
+        [<TagInterface>this.tagRepo.findById(2)],
       ),
     ];
   }
