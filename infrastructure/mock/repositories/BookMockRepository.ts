@@ -36,11 +36,18 @@ class BookMockRepository implements BookRepository {
       ),
     ];
   }
+  async findByAuthorOrIsbnOrTitle(query: string): Promise<BookInterface[]> {
+    return this.books.filter(
+      (book: BookInterface) =>
+        book.getTitle().toLowerCase().includes(query.toLowerCase()) ||
+        book.getIsbn().toLowerCase().includes(query.toLowerCase()) ||
+        book.getAuthor()?.getName().toLowerCase().includes(query.toLowerCase()) ||
+        book.getAuthor()?.getSurname().toLowerCase().includes(query.toLowerCase()),
+    );
+  }
 
-  findAll(): Promise<Book[]> {
-    return new Promise<Book[]>((resolve) => {
-      return this.books;
-    });
+  async findAll(): Promise<BookInterface[]> {
+    return this.books;
   }
 
   findById(id: number): Promise<BookInterface | undefined> {

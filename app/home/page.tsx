@@ -3,14 +3,14 @@
 import SearchBar from '@/components/searchBar/searchBar';
 import BooksContainer from '@/components/booksContainer/BooksContainer';
 import { useEffect, useState } from 'react';
-import { BookApiRepository } from '@/infrastructure/api/repositories/BookApiRepository';
+import BookMockRepository from '@/infrastructure/mock/repositories/BookMockRepository';
 
 export default function Home() {
+  const repo: BookRepository = new BookMockRepository();
   const [allBooks, setAllBooks] = useState([] as BookInterface[]);
   const [books, setBooks] = useState([] as BookInterface[]);
 
   useEffect(() => {
-    const repo = new BookApiRepository();
     repo
       .findAll()
       .then((books) => {
@@ -21,15 +21,9 @@ export default function Home() {
   }, []);
 
   const handleSearch = (query: string) => {
-    console.log(allBooks);
-    const filtered = allBooks.filter(
-      (book: BookInterface) =>
-        book.getTitle().toLowerCase().includes(query.toLowerCase()) ||
-        book.getIsbn().toLowerCase().includes(query.toLowerCase()) ||
-        book.getAuthor()?.getName().toLowerCase().includes(query.toLowerCase()) ||
-        book.getAuthor()?.getSurname().toLowerCase().includes(query.toLowerCase()),
-    );
-    setBooks(filtered);
+    repo.findByAuthorOrIsbnOrTitle(query).then((result) => {
+      setBooks(result);
+    });
   };
 
   return (
