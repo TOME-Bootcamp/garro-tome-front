@@ -1,5 +1,5 @@
 interface BookRepository extends Repository<BookInterface> {
-  getBookAuthor(id: number): AuthorInterface | undefined;
-  getBookPublisher(id: number): PublisherInterface | undefined;
-  getBookTags(id: number): TagInterface[];
+  getBookAuthor(id: number): Promise<AuthorInterface | undefined>;
+  getBookPublisher(id: number): Promise<PublisherInterface | undefined>;
+  getBookTags(id: number): Promise<TagInterface[]>;
 }

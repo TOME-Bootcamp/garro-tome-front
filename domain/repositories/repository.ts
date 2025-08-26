@@ -1,4 +1,4 @@
 interface Repository<T> {
-  findAll(): T[];
-  findById(id: number): T | undefined;
+  findAll(): Promise<T[]>;
+  findById(id: number): Promise<T | undefined>;
 }

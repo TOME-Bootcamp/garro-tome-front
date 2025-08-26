@@ -10,18 +10,20 @@ class AuthorMockRepository implements AuthorRepository {
       new Author(3, 'Author 3', 'Author 3'),
     ];
   }
-
-  findAll(): AuthorInterface[] {
-    return this.authors;
+  findAll(): Promise<AuthorInterface[]> {
+    return new Promise<AuthorInterface[]>((resolve) => {
+      return this.authors;
+    });
   }
-
-  findById(id: number): AuthorInterface | undefined {
-    for (const author of this.authors) {
-      if (author.getId() === id) {
-        return author;
+  findById(id: number): Promise<AuthorInterface | undefined> {
+    return new Promise<AuthorInterface | undefined>((resolve) => {
+      for (const author of this.authors) {
+        if (author.getId() === id) {
+          return resolve(author);
+        }
       }
-    }
-    return undefined;
+      return undefined;
+    });
   }
 }
 export default AuthorMockRepository;
