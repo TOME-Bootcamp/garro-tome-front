@@ -3,10 +3,10 @@
 import SearchBar from '@/components/searchBar/searchBar';
 import BooksContainer from '@/components/booksContainer/BooksContainer';
 import { useEffect, useState } from 'react';
-import BookMockRepository from '@/infrastructure/mock/repositories/BookMockRepository';
+import { BookApiRepository } from '@/infrastructure/api/repositories/BookApiRepository';
 
 export default function Home() {
-  const repo: BookRepository = new BookMockRepository();
+  const repo: BookRepository = new BookApiRepository();
   const [allBooks, setAllBooks] = useState([] as BookInterface[]);
   const [books, setBooks] = useState([] as BookInterface[]);
 

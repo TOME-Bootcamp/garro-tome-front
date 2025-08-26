@@ -40,6 +40,10 @@ export class BookApiRepository implements BookRepository {
       this.baseUrl = 'http://localhost:8080/books';
     }
   }
+  async findByAuthorOrIsbnOrTitle(query: string): Promise<BookInterface[]> {
+    const data = await apiFetch<Payload[]>(`${this.baseUrl}?search=${encodeURIComponent(query)}`);
+    return data.map((it) => convertPayloadToBook(it));
+  }
   async getBookAuthor(id: number): Promise<AuthorInterface | undefined> {
     const book = this.findById(id);
     book
